@@ -14,31 +14,7 @@
                                         <a href="#">Accessories</a>
                                         <span>(3)</span>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="categories-bars-item">
-                                        <a href="#">Electronics & Computer</a>
-                                        <span>(5)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="categories-bars-item">
-                                        <a href="#">Laptops & Desktops</a>
-                                        <span>(2)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="categories-bars-item">
-                                        <a href="#">Mobiles & Tablets</a>
-                                        <span>(8)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="categories-bars-item">
-                                        <a href="#">SmartPhone & Smart TV</a>
-                                        <span>(5)</span>
-                                    </div>
-                                </li>
+                              
                             </ul>
                         </div>
                     </div>
@@ -57,15 +33,16 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="single.html" class="nav-item nav-link">Single Page</a>
+                            <a href="index.php" class="nav-item nav-link ">Home</a>
+                            <a href="login.php" class="nav-item nav-link">Login</a>
+                            <a href="signup.php" class="nav-item nav-link">SignUp</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My account</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="bestseller.html" class="dropdown-item">Bestseller</a>
-                                    <a href="cart.html" class="dropdown-item">Cart Page</a>
-                                    <a href="cheackout.html" class="dropdown-item">Cheackout</a>
+                                    <a href="profile.php" class="dropdown-item">profile</a>
+                                    <a href="favorite.php" class="dropdown-item">Favorite(5)</a>
+                                    <a href="my_products.php" class="dropdown-item">My products(5)</a>
+                                    <a href="discounnect.php" class="dropdown-item">Discounnect(10)</a>
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
@@ -80,36 +57,13 @@
                                                 <span>(3)</span>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="categories-bars-item">
-                                                <a href="#">Electronics & Computer</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="categories-bars-item">
-                                                <a href="#">Laptops & Desktops</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="categories-bars-item">
-                                                <a href="#">Mobiles & Tablets</a>
-                                                <span>(8)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="categories-bars-item">
-                                                <a href="#">SmartPhone & Smart TV</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
+                                      
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
-                                class="fa fa-mobile-alt me-2"></i> +0123 456 7890</a>
+                        <a href="sell.php" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
+                                class="fa fa-pen me-2"></i> sell a product</a>
                     </div>
                 </nav>
             </div>
