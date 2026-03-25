@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,19 +48,43 @@
 
 
     <!-- Navbar & Hero Start -->
-     <?php  include('header.php'); ?>
+     <?php include('header.php'); ?>
     <!-- Navbar & Hero End -->
+     <?php
+     $idu=$_SESSION['idu'];
+     $sel=mysqli_query($conn,"select * from utilisateur where idu='$idu'");
+     $data_sel=mysqli_fetch_assoc($sel);
+     ?>
 
-    <!-- Carousel Start -->
-    <?php  include('slide.php'); ?>
-    <!-- Carousel End -->
+     <form method="post">
+        <input type="text" name="nomu" placeholder="name" value="<?php echo $data_sel['nomu']; ?>" required>
+        <input type="email" name="emailu" placeholder="email" value="<?php echo $data_sel['emailu']; ?>" required>
+        <input type="text" name="telu" placeholder="telephone" value="<?php echo $data_sel['telu']; ?>" required>
+        <input type="password" name="N_mdpu" placeholder="new password"  required>
+        <input type="password" name="O_mdpu" placeholder=" old password"  required>
+        <input type="submit" name="btn" value="update Account">
+    </form>     
+    <?php
+if (isset($_POST['btn'])) {
+    $nomu = $_POST['nomu'];
+    $emailu = $_POST['emailu'];
+    $telu = $_POST['telu'];
+    $N_mdpu = $_POST['N_mdpu'];
+    $O_mdpu = $_POST['O_mdpu'];
 
-    <!-- Our Products Start -->
-     <?php  include('main.php'); ?>
-    <!-- Our Products End -->
+    if ($O_mdpu==$data_sel['mdpu'] ) {
+        $maj = mysqli_query($conn, " update utilisateur
+         set nomu='$nomu',emailu='$emailu',telu='$telu',
+         mdpu='$N_mdpu' where idu ='$idu'");
+   
+        echo "updated !";
+
+    }
+}
+?>
 
     <!-- Footer Start -->
-    <?php  include('footer.php'); ?>
+    <?php include('footer.php'); ?>
     <!-- Footer End -->
 
 

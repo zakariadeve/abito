@@ -9,11 +9,21 @@
                     <div class="collapse navbar-collapse rounded-bottom" id="allCat">
                         <div class="navbar-nav ms-auto py-0">
                             <ul class="list-unstyled categories-bars">
+                                <?php
+                                include "connection.php";
+                                $req_cat=mysqli_query($conn,"SELECT * FROM categorie");
+                                while($row_cat=mysqli_fetch_assoc($req_cat)){
+                                ?>
                                 <li>
+
                                     <div class="categories-bars-item">
-                                        <a href="#">Accessories</a>
-                                        <span>(3)</span>
+                                        <a href="#"><?php echo $row_cat['titrec']; ?></a>
+                                       
                                     </div>
+                                </li>
+                                <?php } ?>
+
+
                               
                             </ul>
                         </div>
@@ -34,19 +44,22 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
                             <a href="index.php" class="nav-item nav-link ">Home</a>
+        <?php if(!isset($_SESSION['idu'])){ ?>
                             <a href="login.php" class="nav-item nav-link">Login</a>
                             <a href="signup.php" class="nav-item nav-link">SignUp</a>
+                            <?php
+                         } else { ?>    
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My account</a>
                                 <div class="dropdown-menu m-0">
                                     <a href="profile.php" class="dropdown-item">profile</a>
                                     <a href="favorite.php" class="dropdown-item">Favorite(5)</a>
                                     <a href="my_products.php" class="dropdown-item">My products(5)</a>
-                                    <a href="discounnect.php" class="dropdown-item">Discounnect(10)</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                    <a href="deconnecter.php" class="dropdown-item">Discounnect(10)</a>
+                                    
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link me-2">Contact</a>
+                            <?php } ?>
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
                                 <div class="dropdown-menu m-0">
@@ -62,8 +75,11 @@
                                 </div>
                             </div>
                         </div>
+                        <?php if(isset($_SESSION['idu'])){ ?>
                         <a href="sell.php" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
                                 class="fa fa-pen me-2"></i> sell a product</a>
+                        <?php } ?>
+
                     </div>
                 </nav>
             </div>

@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
  
@@ -46,19 +44,41 @@
 
 
     <!-- Navbar & Hero Start -->
-     <?php  include('header.php'); ?>
+     <?php include('header.php'); ?>
     <!-- Navbar & Hero End -->
 
-    <!-- Carousel Start -->
-    <?php  include('slide.php'); ?>
-    <!-- Carousel End -->
+     <h1> Create a new account</h1>
+    <form  method="post">
+        <input type="text" name="nomu" placeholder="name" required>
+        <input type="email" name="emailu" placeholder="email" required>
+        <input type="text" name="telu" placeholder="telephone" required>
+        <input type="password" name="mdpu" placeholder="password" required>
+        <input type="submit" name="btn" value="create">
+    </form>
+    <?php
+include "connection.php";
+if (isset($_POST['btn'])) {
+    $nomu = $_POST['nomu'];
+    $emailu = $_POST['emailu'];
+    $telu = $_POST['telu'];
+    $mdpu = $_POST['mdpu'];
+    $rech = mysqli_query($conn, " select * from  utilisateur where emailu ='$emailu'");
+    if (mysqli_num_rows($rech) == 1) {
+        echo "this Email existed";
 
-    <!-- Our Products Start -->
-     <?php  include('main.php'); ?>
-    <!-- Our Products End -->
+    }
+    else {
+        $ajouter = mysqli_query($conn, "insert into utilisateur (nomu,emailu,telu,mdpu) 
+            VALUES ('$nomu','$emailu','$telu','$mdpu')");
+
+
+        echo "success ! you can login";
+    }
+}
+?>
 
     <!-- Footer Start -->
-    <?php  include('footer.php'); ?>
+    <?php include('footer.php'); ?>
     <!-- Footer End -->
 
 

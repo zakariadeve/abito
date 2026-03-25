@@ -1,5 +1,4 @@
 <?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
  
@@ -46,19 +45,37 @@
 
 
     <!-- Navbar & Hero Start -->
-     <?php  include('header.php'); ?>
+     <?php include('header.php'); ?>
     <!-- Navbar & Hero End -->
 
-    <!-- Carousel Start -->
-    <?php  include('slide.php'); ?>
-    <!-- Carousel End -->
+     <h1> Create a new account</h1>
+    <form  method="post">
+        <input type="email" name="emailu" placeholder="email" required>
+        <input type="password" name="mdpu" placeholder="password" required>
+        <input type="submit" name="btn" value="create Account">
+    </form>
+    <?php
+include "connection.php";
+if (isset($_POST['btn'])) {
+    $emailu = $_POST['emailu'];
+    $mdpu = $_POST['mdpu'];
+    $req = mysqli_query($conn, " select * from  utilisateur 
+    where emailu ='$emailu' and mdpu ='$mdpu'   ");
+    if (mysqli_num_rows($req) == 1) {
+        $date_ut = mysqli_fetch_assoc($req);
+        $_SESSION['idu'] = $date_ut['idu'];
+        $_SESSION['nomu'] = $date_ut['nomu'];
+        echo"<script> window.location.href='index.php'; </script> ";
 
-    <!-- Our Products Start -->
-     <?php  include('main.php'); ?>
-    <!-- Our Products End -->
+    }
+    else{
+       echo"<div class=' alert-message'> information Error.</div>";
+    }
+}
+?>
 
     <!-- Footer Start -->
-    <?php  include('footer.php'); ?>
+    <?php include('footer.php'); ?>
     <!-- Footer End -->
 
 
