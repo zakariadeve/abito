@@ -1,5 +1,6 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
+<?php session_start(); ?>
+
 <html lang="en">
  
 <head>
@@ -48,29 +49,55 @@
      <?php include('header.php'); ?>
     <!-- Navbar & Hero End -->
 
-     <h1> Create a new account</h1>
-    <form  method="post">
-        <input type="email" name="emailu" placeholder="email" required>
-        <input type="password" name="mdpu" placeholder="password" required>
-        <input type="submit" name="btn" value="create Account">
+     <h1> Add a product </h1>
+    <form  method="post" enctype="multipart/form-data"> 
+        <input type="text" name="titrep" placeholder="title" required>
+        <input type="text" name="description" placeholder="description" required>
+        <input type="number" name="prix" placeholder="prix" required>
+        <input type="text" name="ville" placeholder="ville" required>
+        <select name="idc">
+               <?php
+                                include "connection.php";
+                                $req_cat=mysqli_query($conn,"SELECT * FROM categorie");
+                                while($data_cat=mysqli_fetch_assoc($req_cat)){
+                                ?>
+            <option value="<?php echo $data_cat['idc']; ?>"><?php echo $data_cat['titrec']; ?></option> 
+             <?php } ?>      
+        </select>
+        <input type="file" name="ph1" required>
+        <input type="file" name="ph2" required>
+        <input type="file" name="ph3" required>
+        
+        <input type="submit" name="btn" value="save and publish">
     </form>
     <?php
 include "connection.php";
 if (isset($_POST['btn'])) {
-    $emailu = $_POST['emailu'];
-    $mdpu = $_POST['mdpu'];
-    $req = mysqli_query($conn, " select * from  utilisateur 
-    where emailu ='$emailu' and mdpu ='$mdpu' and activation = 1");
-    if (mysqli_num_rows($req) == 1) {
-        $date_ut = mysqli_fetch_assoc($req);
-        $_SESSION['idu'] = $date_ut['idu'];
-        echo"<script> window.location.href='index.php'; </script> ";
+    $titrep = $_POST['titrep'];
+    $description = $_POST['description'];
+    $prix = $_POST['prix'];
+    $ville = $_POST['ville'];
+    $idc = $_POST['idc']; 
+    $idu = $_SESSION['idu'];
+    $datep = date("Y-m-d");
+    $ph1 = $_FILES['ph1'];
+    $ph2 = $_FILES['ph2'];
+    $ph3 = $_FILES['ph3'];  
 
+    $chemin1 = "images/" . $ph1['name'];
+    copy($ph1['tmp_name'],$chemin1);
+    $chemin2 = "images/" . $ph2['name'];
+    copy($ph2['tmp_name'],$chemin2);
+    $chemin3 = "images/" . $ph3['name'];
+    copy($ph3['tmp_name'],$chemin3);
+
+        $ajt = mysqli_query($conn, "insert into produit (titrep,description,prix,ville,idc,idu,datep,ph1,ph2,ph3) 
+            values ('$titrep','$description','$prix','$ville','$idc','$idu','$datep','$chemin1','$chemin2','$chemin3')");
+
+
+        echo "<script> alert('product added successfully'); </script> ";
     }
-    else{
-       echo"<div class=' alert-message'> information Error.</div>";
-    }
-}
+
 ?>
 
     <!-- Footer Start -->

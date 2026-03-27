@@ -1,3 +1,7 @@
+<?php
+include "connection.php";
+?>
+
 <div class="container-fluid product py-5">
         <div class="container py-5">
             <div class="tab-class">
@@ -35,6 +39,11 @@
 
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
+                            <?php
+                            include "connection.php";
+                            $req_pro=mysqli_query($conn,"SELECT * FROM produit");
+                            while($row_pro=mysqli_fetch_assoc($req_pro)){
+                            ?>
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="product-item-inner border rounded">
@@ -67,8 +76,9 @@
                                     </div>
                                 </div>
                             </div>
-                          
+                        
                         </div>
+                        <?php } ?>
                     </div>
                   
                 </div>

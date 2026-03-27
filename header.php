@@ -52,9 +52,16 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My account</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="profile.php" class="dropdown-item">profile</a>
+                                    <a href="profil.php" class="dropdown-item">profile</a>
                                     <a href="favorite.php" class="dropdown-item">Favorite(5)</a>
-                                    <a href="my_products.php" class="dropdown-item">My products(5)</a>
+                                    <?php 
+                                    $idu=$_SESSION['idu'];
+                                    $nb_pro=mysqli_query($conn,"SELECT * FROM produit where idu=$idu");
+                                    $nb=mysqli_num_rows($nb_pro);
+                                    ?>
+                                    <a href="my_products.php" class="dropdown-item">My products(<?php echo $nb; ?>)</a>
+                                  
+                                   
                                     <a href="deconnecter.php" class="dropdown-item">Discounnect(10)</a>
                                     
                                 </div>
