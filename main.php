@@ -56,20 +56,20 @@
                                 <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="product-item-inner border rounded">
                                         <div class="product-item-inner-item">
-                                            <img src="<?php echo $data_pro ['ph1']?>"  class="img-fluid w-100 rounded-top" alt="">
+                                            <img src="<?php echo $data_pro['ph1']?>"  class="img-fluid w-100 rounded-top" alt="">
                                            <div class="product-new"><a href="#"
                                                     class="text-success d-flex align-items-center justify-content-center me-0"><span
                                                         class="rounded-circle btn-sm-square border"><i
                                                             class="fas fa-heart"></i></a></div>
                                             <div class="product-details">
-                                                <a href="detail.php"><i class="fa fa-eye fa-1x"></i></a>
+                                                <a href="detail.php?idp=<?php echo $data_pro['idp'] ?>"><i class="fa fa-eye fa-1x"></i></a>
                                             </div>
                                         </div>
                                         <div class="text-center rounded-bottom p-4">
                                             
-                                            <a href="detail.php" class="d-block h4"><?php echo $data_pro ['titrep']?> </a>
+                                            <a href="detail.php?idp=<?php echo $data_pro['idp'] ?>" class="d-block h4"><?php echo $data_pro['titrep']?> </a>
                                             
-                                            <span class="text-primary fs-5"><?php echo $data_pro ['prix']?> dh</span>
+                                            <span class="text-primary fs-5"><?php echo $data_pro['prix']?> dh</span>
                                         </div>
                                     </div>
                                     <div
@@ -94,3 +94,4 @@
             </div>
         </div>
     </div>
+    
