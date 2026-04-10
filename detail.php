@@ -1,8 +1,6 @@
 <?php session_start();  ?>
 <?php include('connection.php'); ?>
-<?php
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -134,24 +132,11 @@
                                
                                 <div class="tab-pane active " id="nav-mission" role="tabpanel"
                                     aria-labelledby="nav-mission-tab">
-                                    <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
-                                        <div class="">
-                                            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Jason Smith</h5>
-                                                
-                                            </div>
-                                            <p>The generated Lorem Ipsum is therefore always free from repetition
-                                                injected humour, or non-characteristic
-                                                words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                        </div>
-                                    </div>
+                                 
  <?php
  $req_comm=mysqli_query($conn,"select * from commentaire,utilisateur ,produit
  where commentaire.idu=utilisateur.idu
-  and commentaire.idp=produit.idp"); 
+  and commentaire.idp=produit.idp and produit.idp=$idp"); 
     while($data_comm=mysqli_fetch_assoc($req_comm)){ 
  ?>       
                                        
@@ -167,59 +152,65 @@
                                             <p><?php echo $data_comm['comment'] ?></p>
                                         </div>
                                     </div>
- <?php } ?>                                   
+ <?php } ?> 
+ <?php
+ if(mysqli_num_rows($req_comm)==0){
+    echo "No reviews yet";
+    }
+    ?>
+                        
+
                                  
                                 </div>
-                                <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                    <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et
-                                        tempor sit. Aliqu diam
-                                        amet diam et eos labore. 3</p>
-                                    <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos
-                                        labore.
-                                        Clita erat ipsum et lorem et sit</p>
-                                </div>
+                               
                             </div>
                         </div>
                         <?php
                         if(isset($_SESSION['idu'])){ ?>
-                        <form action="#">
+                        <form  method="post">
                             <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                             <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="border-bottom rounded">
-                                        <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="border-bottom rounded">
-                                        <input type="email" class="form-control border-0" placeholder="Your Email *">
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="border-bottom rounded my-4">
-                                        <textarea name="" id="" class="form-control border-0" cols="30" rows="8"
+                                        <textarea name="comment" id="" class="form-control border-0" cols="30" rows="8"
                                             placeholder="Your Review *" spellcheck="false"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="d-flex justify-content-between py-3 mb-5">
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 me-3">Please rate:</p>
-                                            <div class="d-flex align-items-center" style="font-size: 12px;">
-                                                <i class="fa fa-star text-muted"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <a href="#"
+                                       
+                                        <button  type="submit" name="btn"
                                             class="btn btn-primary border border-secondary text-primary rounded-pill px-4 py-3">
-                                            Post Comment</a>
+                                            Post Comment</button>
+                                            
+                                
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        
+<?php
+// Handle comment submission
+if(isset($_POST['btn']) ){
+    $comment =$_POST['comment'];
+    $datem = date('Y-m-d');
+    $idu = $_SESSION['idu'];
+    $idp = $_GET['idp'];
+    
+    
+    
+        $insert_comment = mysqli_query($conn, "insert into commentaire ( datem,comment, idu, idp) 
+        values ( '$datem','$comment', $idu, $idp)");
+        if($insert_comment){
+            echo "<script>window.location.href='detail.php?idp=$idp';</script>";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+            
+        }
+    
+}
+?>
                         <?php }else{
                             echo"<a href='login.php'> Login to add reviews </a>";
                            } ?>
