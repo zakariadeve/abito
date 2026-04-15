@@ -1,5 +1,15 @@
 <?php session_start();  ?>
 <?php include('connection.php'); ?>
+<?php
+/*
+  Dernières modifications :
+  - Dynamisation de la section commentaires (affichage des avis depuis la base de données).
+  - Filtrage des commentaires par identifiant de produit ($idp).
+  - Ajout d'un message "No reviews yet" si aucun commentaire n'existe.
+  - Transformation du formulaire d'avis en formulaire POST fonctionnel.
+  - Gestion de l'insertion des commentaires dans la table 'commentaire' et redirection.
+*/
+?>
 
 
 <!DOCTYPE html>
