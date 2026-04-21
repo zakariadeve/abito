@@ -228,7 +228,7 @@
         <form method="post">
             <input type="email" name="emailu" placeholder="Email Address" required>
             <input type="password" name="mdpu" placeholder="Password" required>
-            <input type="submit" name="btn" value="Create Account" >
+            <input type="submit" name="btn" value="login " >
         </form>
         <?php
         if(isset($_POST['btn'])){

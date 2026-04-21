@@ -12,6 +12,7 @@
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
  
@@ -115,9 +116,12 @@
                            
                             <div class="mb-3">
                               
-                                <div class="btn btn-secondary d-inline-block rounded text-white py-1 px-4 ms-2"><i
-                                        class="far fa-heart ms-1"></i> ADD favorite</div>
+                                <div class="btn btn-primary d-inline-block rounded text-white py-1 px-4 ms-2"><i
+                                        class="far fa-heart ms-1"></i><a href="favorite.php?idp=<?php echo $data_pro['idp'] ?>"> ADD favorite</a></div>
+                                <div class="btn btn-primary d-inline-block rounded text-white py-1 px-4 ms-2"><i
+                                        class="fas fa-exclamation-triangle ms-1"></i><a href="Signal.php?idu=<?php echo $data_pro['idu'] ?>&idp=<?php echo $data_pro['idp'] ?>">Signal Seller</a></div>        
                             </div>
+                            
                             <div class="d-flex flex-column mb-3">
                                 <small>Vue: <?php echo $data_pro['vue'] ?> fois</small>
                                 <small>posted <strong class="text-primary"><?php echo $data_pro['datep'] ?></strong></small>
@@ -144,22 +148,25 @@
                                     aria-labelledby="nav-mission-tab">
                                  
  <?php
- $req_comm=mysqli_query($conn,"select * from commentaire,utilisateur ,produit
+ $req_comm=mysqli_query($conn,"select * from commentaire,utilisateur 
  where commentaire.idu=utilisateur.idu
-  and commentaire.idp=produit.idp and produit.idp=$idp"); 
+  and commentaire.idp=$idp "); 
     while($data_comm=mysqli_fetch_assoc($req_comm)){ 
  ?>       
                                        
                                     <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
+                                        
                                         <div class="">
                                             <p class="mb-2" style="font-size: 14px;"><?php echo $data_comm['datem'] ?></p>
+                                            <?php if(isset($_SESSION['idu']) && $_SESSION['idu'] == $data_comm['idu']){ ?>
+                                            <a href=" del_comm.php?idm=<?php echo $data_comm['idm'] ?>&idp=<?php echo $data_comm['idp'] ?>">delete</a>
+                                            <?php } ?>
                                             <div class="d-flex justify-content-between">
                                                 <h5><?php echo $data_comm['nomu'] ?></h5>
                                                
                                             </div>
                                             <p><?php echo $data_comm['comment'] ?></p>
+                                            <hr>
                                         </div>
                                     </div>
  <?php } ?> 

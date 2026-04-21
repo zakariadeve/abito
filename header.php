@@ -47,7 +47,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">My account</a>
                                 <div class="dropdown-menu m-0">
                                     <a href="profil.php" class="dropdown-item">Profil</a>
-                                    <a href="favorate.php" class="dropdown-item">Favorite(5)</a>
+                                    <a href="my_fav.php" class="dropdown-item">Favorite(5)</a>
                                     <?php  
                                         $idu=$_SESSION['idu'];
                                         $nb_pro=mysqli_query($conn,"select * from produit where idu=$idu");
