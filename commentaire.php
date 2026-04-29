@@ -1,4 +1,4 @@
-<?php session_start();
+ <?php session_start();
  include('connection.php'); 
 if(!isset($_SESSION['admin'])){
     echo "<script>window.location.href='admin.php'</script>";
@@ -9,7 +9,7 @@ if(!isset($_SESSION['admin'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cpanel</title>
+    <title>Commentaires</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <style>
@@ -284,86 +284,16 @@ if(!isset($_SESSION['admin'])){
     </style>
 </head>
 <body>
-    <div class="panel-layout">
-        <nav>
-            <div class="brand">
-                <span class="brand-badge">Admin Space</span>
-                <h2>Abito Panel</h2>
-                <p>Un tableau de bord plus propre pour la gestion quotidienne.</p>
-            </div>
-            <ul>
-                <li><a href="categorie.php">Categories</a></li>
-                <li><a href="commentaire.php">commentaires</a></li>
-                <li><a href="cpanel.php">Dashboard</a></li>
-                <li><a href="utilisateur.php">Users</a></li>
-                <li><a href="produit.php">Products</a></li>
-                <li><a href="deconnecter.php">Disconnect</a></li>
-            </ul>
-        </nav>
-
-        <main class="panel-main">
-            <section class="hero" id="cpanel.php">
-                <h1>Dashboard administrateur</h1>
-                <p>Cette page rassemble les actions essentielles du panneau d'administration avec une presentation plus moderne, plus lisible et adaptee au mobile.</p>
-            </section>
-
-            <section class="panel-card" id="categorie.php">
-                <h1> gestion des categories </h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>titre</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                     <?php
-                    $req_cat=mysqli_query($conn,"select * from categorie");
-                    while($data_cat=mysqli_fetch_assoc($req_cat)){
-                    ?>
-
-                        <tr>          
-                            <td><?php echo $data_cat['titrec'] ?></td>
-                            <td><a href="sup_cat.php?idc=<?php echo $data_cat['idc'] ?>">delete</a></td>
-                        </tr>
-
-                   <?php } ?>
-                   </tbody>
-                </table>
-                <div>
-                    <h3> Ajouter une categories</h3>
-                    <form action="" method="post">
-                        <input type="text" name="titrec" placeholder="Nom de la categorie" required>
-                        <input type="submit" name="btn" value="Ajouter">
-                    </form>
-                    <?php
-                    if(isset($_POST['btn'])){
-                        $titrec = $_POST['titrec'];
-                        $ajt=mysqli_query($conn,"insert into categorie (titrec) values ('$titrec')");
-                        if($ajt){
-                            echo "<script>window.location.href='cpanel.php'</script>";
-                        }
-                        else{
-                            echo "error error ";
-                        }
-                    }
-                    ?>
-                </div>
-            </section>
-
-            <div class="">
+    <section >
                 <section class="placeholder-box" id="commentaire.php">
                     <strong>Commentaires</strong>
                     <table>
-                        <thead>
-                            <tr>
-                                <th>nom</th>
-                                <th>Comment</th>
-                                <th>date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <tr>
+                            <th>nom</th>
+                            <th>Comment</th>
+                            <th>date</th>
+                            <th>Action</th>
+                        </tr>
                          <?php
                     $req_com=mysqli_query($conn,"select * from commentaire,utilisateur 
                     where commentaire.idu=utilisateur.idu");
@@ -376,69 +306,12 @@ if(!isset($_SESSION['admin'])){
                         <td><a href="sup_com.php?idm=<?php echo $data_com['idm'] ?>">Delete</a></td>
                     </tr>
                     <?php } ?>
-                        </tbody>
-                    </table>
-                </section>
-                
-                <section class="placeholder-box" id="utilisateur.php">
-                    <strong>Utilisateurs</strong>
-                    <a href="print_user.php">Print</a>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>nom</th>
-                                <th>Email</th>
-                                <th>Signaler</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                         <?php
-                    $req_ut=mysqli_query($conn,"select * from utilisateur order by signaler desc");
-                    
-                    while($data_ut=mysqli_fetch_assoc($req_ut)){
-                    ?>
-                    <tr>
-                        <td><?php echo $data_ut['nomu'] ?></td>
-                        <td><?php echo $data_ut['emailu'] ?></td>
-                        <td><?php echo $data_ut['signaler'] ?></td>
-                        <td><a href="delete_user.php?idu=<?php echo $data_ut['idu']; ?>" class="btn-delete">🗑 Supprimer</a></td>
-                    </tr>
-                <?php } ?>
-                </tbody>
-            </table>
-                </section>
-                            
-                <section class="placeholder-box" id="produit.php">
-                    <strong>produits</strong>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>titre</th>
-                                <th>prix</th>
-                                <th>image</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                         <?php
-                    $req_prod=mysqli_query($conn,"select * from produit ");
-                    
-                    while($data_prod=mysqli_fetch_assoc($req_prod)){
-                    ?>
-                    <tr>
-                        <td><?php echo $data_prod['titrep'] ?></td>
-                        <td><?php echo $data_prod['prix'] ?></td>
-                        <td><img src="<?php echo $data_prod['ph1'] ?>" width="100px" height="100px" alt=""></td>
-                        <td><a href="delete_prod.php?idp=<?php echo $data_prod['idp']; ?>" class="btn-delete">🗑 Supprimer</a></td>
+                        
 
-                    </tr>
-                <?php } ?>
-                </tbody>
-            </table>
+                    </table>
+                   
+
                 </section>
-            </div>
-        </main>
-    </div>
 </body>
-</html>
+</html>          
+           
